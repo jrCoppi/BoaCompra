@@ -1,0 +1,42 @@
+.titulo {
+    color: #e95d0f;
+}
+
+.negrito {
+    font-style: bold;
+}
+
+.link{
+    cursor: pointer;
+}
+
+.panel_bg {
+    background-color: #f5f5f5;
+}
+
+.login_bg {
+    background-color: #ECECEC;
+}
+
+.group_linhas {
+   box-shadow: none;
+}
+
+.lista_linhas {
+   border: none;
+}
+
+.tooltip-inner {
+    max-width: 500px;
+    /* If max-width does not work, try using width instead */
+    width: 500px; 
+}
+
+.bs-docs-footer {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-top: 100px;
+    color: #99979c;
+    text-align: center;
+    background-color: #2a2730
+}
