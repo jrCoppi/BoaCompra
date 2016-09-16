@@ -30,7 +30,7 @@
             <!-- LOGIN -->
             <div class="row panel-body login_bg" style="text-align:center;">
                <b>Novo no site?&nbsp;&nbsp;
-               <button type="button" class="btn btn-primary" ng-click="">Cadastre-se agora</button>
+               <a type="button" class="btn btn-primary" href="cadastro.php">Cadastre-se agora</a>
                </b> 
             </div>
 

@@ -14,8 +14,9 @@ $ds_login   = $objRequest->ds_login_novo;
 $ds_senha   = $objRequest->ds_senha_novo;
 $nm_pessoa  = $objRequest->nm_pessoa;
 $ds_cpf     = $objRequest->ds_cpf;
+$dt_nascimento  = $objRequest->dt_nascimento;
 
-$idCliente = $WSProcessa->efetuaCadastroCliente($nm_pessoa,$ds_cpf,$ds_login,$ds_senha);
+$idCliente = $WSProcessa->efetuaCadastroCliente($nm_pessoa,$ds_cpf,$ds_login,$ds_senha,$dt_nascimento);
 
 if($idCliente != -1){
    $_SESSION['idCliente'] = $idCliente;

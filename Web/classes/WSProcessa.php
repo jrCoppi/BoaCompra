@@ -48,7 +48,7 @@ class WSProcessa extends WebService
    /**
     * Função WS para cadastrar clientes
     */
-   public function efetuaCadastroCliente($nome = '', $cpf = '', $login = '', $senha = '')
+   public function efetuaCadastroCliente($nome = '', $cpf = '', $login = '', $senha = '',$dt_nascimento = '')
    {
       return $this->cadastraCliente(array(
          'nome'  => $nome,
