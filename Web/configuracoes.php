@@ -26,4 +26,13 @@ $_SESSION['titulo']  = 'Boa Compra';
 $_SESSION['enderecoWebService'] = 'http://127.0.0.1:9876/webservice?wsdl';
 $_SESSION['arrProdutos'] = array();
 $_SESSION['arrProdutosAtuais'] = array();
+
+$_SESSION['arrDadosConexao'] = array();
+$_SESSION['arrDadosConexao']['ipConexao'] = 'localhost';
+$_SESSION['arrDadosConexao']['hostConexao'] = 'root';
+$_SESSION['arrDadosConexao']['passConexao'] = 'root';
+$_SESSION['arrDadosConexao']['baseConexao'] = 'processos';
+$_SESSION['arrDadosConexao']['nrTentativasConexao'] = 10;
+
+
 ?>

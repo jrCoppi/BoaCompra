@@ -1,4 +1,4 @@
-<?php include_once('cabecalho.php') ?>
+<?php include_once('cabecalho.php');    ?>
 
     <script src="<?php echo $_SESSION['arrCaminhos']['angular']; ?>login.js"></script>
 </head>
