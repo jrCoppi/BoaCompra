@@ -55,17 +55,8 @@
                       </form>
 
                       <div class="row"><br></div>
-                      <h4 class="text-left negrito" style="font-family: 'Droid Sans',sans-serif;font-style: bold;">
-                          <b>Histórico:</b>
-                      </h4>
     
                  </div>
-
-                 <div class="col-md-12" ng-repeat="(descricao,produto) in arrProdutos">
-                 - {{produto}}
-                 </div>
-
-
               </div>
 
           </div>

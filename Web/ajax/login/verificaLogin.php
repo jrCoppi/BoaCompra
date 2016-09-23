@@ -6,8 +6,8 @@ include_once('../../'. $_SESSION['arrCaminhos']['dados'].'Usuario.php');
 $ds_post    = file_get_contents("php://input");
 $objRequest = json_decode($ds_post);
 
-$ds_login   = $objRequest->ds_login;
-$ds_senha   = $objRequest->ds_senha;
+$ds_login   = utf8_decode($objRequest->ds_login);
+$ds_senha   = utf8_decode($objRequest->ds_senha);
 
 $objUsuario = new Usuario();
 $idCliente = $objUsuario->verificaLoginUsuario($ds_login,$ds_senha);

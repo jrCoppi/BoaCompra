@@ -1,11 +1,8 @@
 <?php
 session_start();
 
-include_once('../../'. $_SESSION['arrCaminhos']['class'].'WSProcessa.php');
+include_once('../../'. $_SESSION['arrCaminhos']['dados'].'Usuario.php');
 
-$WSProcessa = WSProcessa::getInstance(
-   $_SESSION['enderecoWebService']
-);
 
 $ds_post    = file_get_contents("php://input");
 $objRequest = json_decode($ds_post);
@@ -16,7 +13,18 @@ $nm_pessoa  = $objRequest->nm_pessoa;
 $ds_cpf     = $objRequest->ds_cpf;
 $dt_nascimento  = $objRequest->dt_nascimento;
 
-$idCliente = $WSProcessa->efetuaCadastroCliente($nm_pessoa,$ds_cpf,$ds_login,$ds_senha,$dt_nascimento);
+$objUsuario = new Usuario();
+
+$arrDados = array(
+   'nm_pessoa' => '"' . utf8_decode($nm_pessoa) . '"',
+   'ds_cpf' => '"' . utf8_decode($ds_cpf) . '"',
+   'ds_login' => '"' . utf8_decode($ds_login) . '"',
+   'ds_senha' => 'md5("' . utf8_decode($ds_senha) . '")',
+   'dt_nascimento' => '"' . implode("-",array_reverse(explode("/",$dt_nascimento))) . '"'
+);
+
+
+$idCliente = $objUsuario->efetuaCadastroCliente($arrDados);
 
 if($idCliente != -1){
    $_SESSION['idCliente'] = $idCliente;

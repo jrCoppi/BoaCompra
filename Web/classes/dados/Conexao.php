@@ -43,10 +43,10 @@ class Conexao
       $conexaoInterna = false;
 
       //Aumenta time limit
-      set_time_limit($tentativasConexao * 40);
+      set_time_limit(30);
 
       // Tenta conectar 
-      while ($tentativasConexao < $arrDadosConexao['nrTentativasConexao'] && $conexaoInterna == false){
+      //while ($tentativasConexao < $arrDadosConexao['nrTentativasConexao'] && $conexaoInterna == false){
          $conexaoInterna = mysql_connect(
             $arrDadosConexao['ipConexao'],
             $arrDadosConexao['hostConexao'],
@@ -54,9 +54,18 @@ class Conexao
          );   
          $tentativasConexao++;
          mysql_selectdb($arrDadosConexao['baseConexao']);
-      }
+/*
+         $conexaoInterna = new mysqli(
+            $arrDadosConexao['ipConexao'],
+            $arrDadosConexao['hostConexao'],
+            $arrDadosConexao['passConexao'],
+            $arrDadosConexao['baseConexao']
+         );   */
+       //  $tentativasConexao++;
+     // }
 
       if($conexaoInterna == false){
+         var_dump($arrDadosConexao);
          echo "Erro.";
          die();
       }
@@ -79,12 +88,12 @@ class Conexao
 
       $resultSet = $this->executaQuery($consulta);
 
-      if($resultSet == false){
+      if($resultSet === false){
          return null;
       }
 
       //Joga os valores num array
-      while ($row = mysqli_fetch_assoc($resultSet)) {
+      while ($row = mysql_fetch_array($resultSet)) {
          $arrResult[] = $row;
       }
 
@@ -112,15 +121,17 @@ class Conexao
 
       $resultado = $this->executaQuery($consulta);
 
-      return $resultado;
+      //retorna o id gerado
+      return $this->getUltimoId();
+   }
+
+   public function getUltimoId(){
+      return mysql_insert_id();
    }
 
    public function executaQuery($consulta){
-      if($this->conexao == false){
-         $this->iniciaConexao();
-      }
-      
-      return $this->conexao->mysql_query($consulta);
+
+      return mysql_query($consulta);
    }
 }
 ?>

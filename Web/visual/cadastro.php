@@ -67,7 +67,7 @@
 
                                  <div class="col-md-4">
                                     <label for="f1">Login:</label>
-                                    <input type="password" class="form-control" id="ds_login_novo" ng-model="ds_login_novo" required>
+                                    <input type="text" class="form-control" id="ds_login_novo" ng-model="ds_login_novo" required>
                                  </div>
 
                                  <div class="col-md-1"></div>

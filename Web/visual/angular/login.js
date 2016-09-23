@@ -37,7 +37,7 @@ function createController( $scope, $http, filterFilter ) {
           function(idCliente){
 
             // se data for true, deu erro de login
-            if (idCliente == "-1") {
+            if (idCliente == "null") {
                 $scope.sn_exibir_erro_login = true;
                 return '';
             }

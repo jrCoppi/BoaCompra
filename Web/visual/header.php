@@ -8,7 +8,7 @@
          </div>
 
          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Inicio</a></li>
+            <li><a href="inicial.php">Inicio</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="login.php">Login</a></li>
             <li><a href="cadastro.php">Cadastro</a></li>
@@ -23,6 +23,6 @@
    </div>
    <div class="col-md-7"></div>
    <div class="col-md-4 link" style="text-align:right;">
-      <b>Sistema Boa Compra</b>
+      <a href="inicial.php"><b>Sistema Boa Compra</b></a>
    </div>
 </div>

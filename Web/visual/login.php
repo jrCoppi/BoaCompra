@@ -23,33 +23,43 @@
                  <div class="row"><br></div>
 
                   <div class="row">
-                      <div class="panel panel-default">
-                          <div class="panel-body panel_bg">
+ 
+                     <h5 class="negrito">
+                        <b>Efetue seu login:</b>
+                     </h5>
 
-                              <h5 class="negrito">
-                                  <b>Efetue seu login:</b>
-                              </h5>
+                     <div ng-show="sn_exibir_erro_login" ng-init="false" class="text-danger">
+                        Login e senha incorretos, tente novamente
+                     </div>
 
-                              <div ng-show="sn_exibir_erro_login" ng-init="false" class="text-danger">
-                                  Login e senha incorretos, tente novamente
-                              </div>
+                     <div class="col-md-12">
+                        
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                           <label for="f1">Login:</label>
+                           <input type="text" class="form-control" id="ds_login" ng-model="ds_login" required>
+                        </div>
 
-                              <div class="form-inline">
-                                  <div class="form-group">
-                                      <label for="f1">Login:</label>
-                                      <input type="text" class="form-control" ng-model="ds_login">
-                                  </div>
+                        <div class="col-md-2"></div>
 
-                                  <div class="form-group">
-                                      <label for="exampleInputPassword1">Senha:</label>
-                                      <input type="password" class="form-control" id="ds_senha" ng-model="ds_senha">
-                                  </div>
+                        <div class="col-md-4">
+                           <label for="f1">Senha:</label>
+                           <input type="password" class="form-control" id="ds_senha" ng-model="ds_senha" required>
+                        </div>
 
-                                  <button type="button" class="btn btn-danger" ng-click="tentaLogar()">Fazer Login</button>
-                              </div>
+                        <div class="col-md-1"></div>
+                     </div>
 
-                          </div>
-                      </div>
+                     <div class="col-md-12"><br></div>
+
+                     <div class="col-md-12">
+                        <div class="col-md-10">
+                        </div>
+                        <div class="col-md-2">
+                           <button type="button" class="btn btn-danger" ng-click="tentaLogar()">Fazer Login</button>
+                        </div>
+                     </div>
+
                   </div>
               </div>
 

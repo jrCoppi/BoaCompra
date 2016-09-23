@@ -40,3 +40,10 @@
     text-align: center;
     background-color: #2a2730
 }
+
+a { color:black; }
+a:hover { 
+   color:black;
+   cursor: pointer; 
+}
+.nav a { color:black; }

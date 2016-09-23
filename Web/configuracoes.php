@@ -32,7 +32,5 @@ $_SESSION['arrDadosConexao']['ipConexao'] = 'localhost';
 $_SESSION['arrDadosConexao']['hostConexao'] = 'root';
 $_SESSION['arrDadosConexao']['passConexao'] = 'root';
 $_SESSION['arrDadosConexao']['baseConexao'] = 'processos';
-$_SESSION['arrDadosConexao']['nrTentativasConexao'] = 10;
-
-
+$_SESSION['arrDadosConexao']['nrTentativasConexao'] = 1;
 ?>
