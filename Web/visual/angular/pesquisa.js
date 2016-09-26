@@ -12,19 +12,6 @@ AppPesquisa.controller(
  */
 function createController( $scope, $http, filterFilter ) {
    $scope.ds_produto = '';
-
-   $scope.carregaHistorico = function(){
-      $http.post(
-          '../ajax/historico/getHistorico.php'
-      )
-      .success(
-          function(data){
-            $scope.arrProdutos = data;
-          }
-      );
-   }
-
-   $scope.carregaHistorico();
 }
 
 

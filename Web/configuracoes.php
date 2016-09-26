@@ -3,6 +3,8 @@ date_default_timezone_set('America/Sao_Paulo');
 $arrCaminhos = array();
 $arrDadosConexao = array();
 
+//var_dump();
+
 // Incia as variaveis dos caminhos
 // Visual
 $arrCaminhos['visual']  = 'visual/';

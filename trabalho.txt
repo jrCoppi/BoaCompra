@@ -1,0 +1,12 @@
+set path=%path%;C:\Program Files\Java\jdk1.8.0_66\bin
+
+--LEITURA
+cd C:\Users\junio\Google Drive\Furb\7º Semestre\Processo de Software 2\BoaCompra\Controle\build\classes
+set classpath=.
+cd C:\Users\junio\Google Drive\Furb\7º Semestre\Processo de Software 2\BoaCompra\Servidor\build\classes
+set classpath=.
+rmic rmi.ServidorLeitura
+
+--Copiar
+
+start rmiregistry

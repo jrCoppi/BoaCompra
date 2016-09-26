@@ -16,6 +16,5 @@ import java.util.HashMap;
 
 public interface Comunicacao extends Remote {
    public HashMap<String,ArrayList<ResultadoBusca>> efetuaLeitura(ArrayList<String> Produto) throws RemoteException;
-   public HashMap<String,ArrayList<ResultadoBusca>> ordernaResultado(String flag)  throws RemoteException;
 }
 

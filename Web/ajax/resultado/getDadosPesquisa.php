@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-$arrRetorno = $_SESSION['arrProdutosAtuais'];
+$arrRetorno = $_SESSION['produtos'];
+
 
 function correcaoUTF8(&$valor) {
    if (is_string($valor)) {

@@ -44,31 +44,6 @@ class WSProcessa extends WebService
       return WSProcessa::$instance;
    }
 
-
-   /**
-    * Função WS para cadastrar clientes
-    */
-   public function efetuaCadastroCliente($nome = '', $cpf = '', $login = '', $senha = '',$dt_nascimento = '')
-   {
-      return $this->cadastraCliente(array(
-         'nome'  => $nome,
-         'cpf'   => $cpf,
-         'login' => $login,
-         'senha' => $senha
-      ));
-   }
-
-   /**
-    * Função WS para verificar login cliente
-    */
-   public function loginCliente($login = '', $senha = '')
-   {
-      return $this->verificaLoginCliente(array(
-         'login' => $login,
-         'senha' => $senha
-      ));
-   }
-
    /**
     * Função WS para efetuar leitura
     */
@@ -93,28 +68,8 @@ class WSProcessa extends WebService
             $arrProdutos[$indexProduto]['arrMercados'] = $listaProdutos['list']['Dados.ResultadoBusca'];
          }
       }
+
       return $arrProdutos;
-   }
-
-   /**
-    * Função WS para efetuar leitura
-    */
-   public function retornaHistoricoCliente($login = '')
-   {
-      return $this->getHistoricoCliente(array(
-         'login' => $login
-      ));
-   }
-
-   /**
-    * Função WS para gravar historico
-    */
-   public function gravaHistoricoCliente($produto = '',$loginCliente = '')
-   {
-      return $this->setHistoricoCliente(array(
-         'produto' => $produto,
-         'login' => $loginCliente
-      ));
    }
 
    /**
