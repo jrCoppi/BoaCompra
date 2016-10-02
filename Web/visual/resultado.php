@@ -42,17 +42,17 @@
                               <b>Produto: {{descricao}}</b>
                             </div>
 
-                            <div ng-repeat="mercados in produto.arrMercados">
+                            <!-- div ng-repeat="mercados in produto.arrMercados"-->
                                
                                
                                   <div class="row">
-                                    <b>Mercado:</b> {{mercados.mercado}}<br>
-                                    <b>Descrição Produto:</b> {{mercados.descricaoProduto}}<br>
-                                    <b>Preço:</b> R$ {{mercados.precoProduto}}
+                                    <b>Mercado:</b> {{produto.arrMercados.mercado}}<br>
+                                    <b>Descrição Produto:</b> {{produto.arrMercados.descricaoProduto}}<br>
+                                    <b>Preço:</b> R$ {{produto.arrMercados.precoProduto}}
                                   </div>
                                
                                <br>
-                            </div>
+                            <!--/div-->
                       </div>
 
                     </div>
