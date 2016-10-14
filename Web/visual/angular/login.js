@@ -17,6 +17,7 @@ function createController( $scope, $http, filterFilter ) {
    $scope.ds_cpf = '';
    $scope.ds_login_novo = '';
    $scope.ds_senha_novo = '';
+   $scope.sn_exibir_erro_login = false;
 
    $scope.tentaLogar = function(){
       if($scope.ds_login == '' || $scope.ds_senha == ''){

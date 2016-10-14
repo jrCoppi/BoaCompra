@@ -39,15 +39,15 @@
                                  
                                  <div class="col-md-1"></div>
                                  <div class="col-md-4">
-                                    <label for="f1">Nome:</label>
-                                    <input type="text" class="form-control" id="nm_pessoa" ng-model="nm_pessoa" required>
+                                    <label for="f1"><span class="text-danger"><strong>*</strong></span> Nome:</label>
+                                    <input type="text" class="form-control" id="nm_pessoa" name="nm_pessoa" ng-model="nm_pessoa" required>
                                  </div>
 
                                  <div class="col-md-2"></div>
 
                                  <div class="col-md-4">
-                                    <label for="f1">CPF:</label>
-                                    <input type="text" class="form-control ui-inputmask" id="ds_cpf" ng-model="ds_cpf" required>
+                                    <label for="f1"><span class="text-danger"><strong>*</strong></span> CPF:</label>
+                                    <input type="text" class="form-control ui-inputmask" id="ds_cpf"  name="ds_cpf" ng-model="ds_cpf" required>
                                  </div>
 
                                  <div class="col-md-1"></div>
@@ -59,15 +59,15 @@
                                  
                                  <div class="col-md-1"></div>
                                  <div class="col-md-4">
-                                    <label for="f1">Data de Nascimento:</label>
-                                    <input type="text" class="form-control" id="dt_nascimento" ng-model="dt_nascimento" required>
+                                    <label for="f1"><span class="text-danger"><strong>*</strong></span> Data de Nascimento:</label>
+                                    <input type="text" class="form-control" name="dt_nascimento" id="dt_nascimento" ng-model="dt_nascimento" required>
                                  </div>
 
                                  <div class="col-md-2"></div>
 
                                  <div class="col-md-4">
-                                    <label for="f1">Login:</label>
-                                    <input type="text" class="form-control" id="ds_login_novo" ng-model="ds_login_novo" required>
+                                    <label for="f1"><span class="text-danger"><strong>*</strong></span> Login:</label>
+                                    <input type="text" class="form-control" name="ds_login_novo" id="ds_login_novo" ng-model="ds_login_novo" required>
                                  </div>
 
                                  <div class="col-md-1"></div>
@@ -80,15 +80,15 @@
                                  
                                  <div class="col-md-1"></div>
                                  <div class="col-md-4">
-                                    <label for="f1">Senha:</label>
-                                    <input type="password" class="form-control" id="ds_senha_novo" ng-model="ds_senha_novo" required>
+                                    <label for="f1"><span class="text-danger"><strong>*</strong></span> Senha:</label>
+                                    <input type="password" class="form-control" id="ds_senha_novo" name="ds_senha_novo" ng-model="ds_senha_novo" required>
                                  </div>
 
                                  <div class="col-md-2"></div>
 
                                  <div class="col-md-4">
-                                    <label for="f1">Confirmação da Senha:</label>
-                                    <input type="password" class="form-control" id="ds_senha_novo_confirma" ng-model="ds_senha_novo_confirma" required>
+                                    <label for="f1"><span class="text-danger"><strong>*</strong></span> Confirmação da Senha:</label>
+                                    <input type="password" class="form-control" id="ds_senha_novo_confirma" name="ds_senha_novo_confirma" ng-model="ds_senha_novo_confirma" required>
                                  </div>
 
                                  <div class="col-md-1"></div>
@@ -113,5 +113,4 @@
            </div>
       </div>
    </div>
-</body>
-<?php include_once('rodape.php') ?>
+   <?php include_once('rodape.php') ?>

@@ -19,7 +19,7 @@
 
             <div class="content" style="text-align:center;">
                 <h1>Sistema Boa Compra</h1>
-                <img src="img/logo.png"></img>
+                <img src="img/logo.png" title="Logo do sistema"></img>
                 <br>
                 <h3>Sua compra com economia e eficiência</h3>
             </div>
