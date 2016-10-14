@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 /**
  * Classe de Controle do Servidor
+ * @author lcoppi
  */
 public class Controle {
     private ArrayList<String> listaProdutos;
@@ -57,7 +58,43 @@ public class Controle {
                 "class=\"price\"");
         this.listaSites.add(siteAtual); 
         
-        this.numeroMercados = 1;
+        siteAtual = new Site(
+                "Extra Delivery",
+                "http://busca.deliveryextra.com.br/search?w=replace", 
+                "UTF-8", 
+                "+",
+                "class=\"sli_grid_result\"",
+                "class=\"sli_grid_title sli_h2\"",
+                "class=\"sli_price\"");
+        this.listaSites.add(siteAtual);
+        
+        siteAtual = new Site(
+                "Manbo Delivery",
+                "http://busca.mambo.com.br/busca?q=replace", 
+                "UTF-8", 
+                "+",
+                "class=\"prateleira principal",
+                "class=\"collection-name\"",
+                "class=\"preco-por\"");
+        this.listaSites.add(siteAtual);
+        
+        this.numeroMercados = 3;
+        
+        
+       /* Site siteAtual = new Site(
+                "Pão de Açucar",
+                "http://busca.paodeacucar.com.br/search?view=grid&asug=&w=replace", 
+                "UTF-8", 
+                "+",
+                "class=\"sli_container ",
+                "title=\"http://www.paodeacucar.com.br/produto",
+                "class=\"value\"");
+        this.listaSites.add(siteAtual); */
+       // http://busca.deliveryextra.com.br/search?w=pao+de+acular
+        //http://buscando.extra.com.br/search?w=nescau
+        //http://busca.paodeacucar.com.br/search?view=grid&asug=&w=nescau
+        //http://www.angeloni.com.br/super/busca?q=feijao
+        //http://www.sondadelivery.com.br/delivery.aspx/busca/0/arroz%20prato
     }
         
     //Dispara os mtodos de Leitura
@@ -70,6 +107,7 @@ public class Controle {
         this.leitura.finalizaLeitura();
     }
     
+    //Controle de threads, varios sites adicionando ao mesmo tempo varios produtos
     //Chave = Produto
     public synchronized void adicionarResultado(String produto,ResultadoBusca resultado) {
         if(this.hashResultados.get(produto) == null){
