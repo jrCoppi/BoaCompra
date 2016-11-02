@@ -11,6 +11,11 @@ $arrProdutos = $_POST['ds_produto'];
 //Se ainda temos o que procurar efetua a leitura
 if (!empty($arrProdutos)){
 
+   //Para cada um dos produtos processados verifica se já tem em base e tbm cadastrada
+   foreach ($arrProdutos as $chave => $produtos) {
+      # code...
+   }
+
    $arrProdutos = implode(";", $arrProdutos);
 
    $arrProdutosNovos = $WSProcessa->efetuaLeitura($arrProdutos);
