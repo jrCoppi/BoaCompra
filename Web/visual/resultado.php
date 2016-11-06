@@ -35,25 +35,25 @@
                     <div class="row"><br></div>
 
                     <div class="row col-md-12" >
-                      
-                      <div class="col-md-6 text-center" ng-repeat="(descricao,produto) in arrProdutos">
-                         
-                            <div style="font-family: 'Droid Sans',sans-serif;font-style: bold;color: red;">
-                              <b>Produto: {{descricao}}</b>
-                            </div>
+                    
+                    <div class="col-md-6 text-center" ng-repeat="(descricao,produto) in arrProdutos">
+                       
+                          <div style="font-family: 'Droid Sans',sans-serif;font-style: bold;color: red;">
+                            <b>Produto: {{descricao}}</b>
+                          </div>
 
-                            <!-- div ng-repeat="mercados in produto.arrMercados"-->
-                               
-                               
-                                  <div class="row">
-                                    <b>Mercado:</b> {{produto.arrMercados.mercado}}<br>
-                                    <b>Descrição Produto:</b> {{produto.arrMercados.descricaoProduto}}<br>
-                                    <b>Preço:</b> R$ {{produto.arrMercados.precoProduto}}
-                                  </div>
-                               
-                               <br>
-                            <!--/div-->
-                      </div>
+                          <div ng-repeat="mercados in produto.arrMercados">
+                             
+                             
+                                <div class="row">
+                                  <b>Mercado:</b> {{mercados.mercado}}<br>
+                                  <b>Descrição Produto:</b> {{mercados.descricaoProduto}}<br>
+                                  <b>Preço:</b> R$ {{mercados.precoProduto}}
+                                </div>
+                             
+                             <br>
+                          </div>
+                    </div>
 
                     </div>
 

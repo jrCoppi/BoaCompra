@@ -93,7 +93,7 @@ class Conexao
       }
 
       //Joga os valores num array
-      while ($row = mysql_fetch_array($resultSet)) {
+      while ($row = mysql_fetch_assoc($resultSet)) {
          $arrResult[] = $row;
       }
 

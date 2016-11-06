@@ -33,15 +33,15 @@ class Produto extends Conexao {
 
       //Verifica se foi usado numa pesquisa no dia 
 
-      /*$sql = "SELECT id_categoria FROM categorias WHERE ds_login = '" . $ds_login . "' AND ds_senha = md5('" . $ds_senha . "');";
-
+      $sql = "SELECT id_pesquisa FROM produto_pesquisa WHERE id_produto = '" . $codigoProduto . "'";
+      
       $resultado = Conexao::getInstance()->realizaConsulta($sql);
 
       if($resultado == null){
          return null;
       }
 
-      return $resultado[0]['id_pessoa'];*/
+      return $resultado[0]['id_pesquisa'];
    }
 
 
@@ -62,7 +62,7 @@ class Produto extends Conexao {
          return null;
       }
 
-      return $resultado[0]['ds_produto'];
+      return $resultado[0]['id_produto'];
    }
 
    /**
@@ -71,8 +71,16 @@ class Produto extends Conexao {
     * @return type
     */
    public function adicionaProduto($ds_produto){
+      //ve se não tem ja cadastrado
+      $codigoProduto = $this->getCodigoProduto($ds_produto);
+
+      //Não tem, cadastra e retorna nulo
+      if($codigoProduto != null){
+         return $codigoProduto;
+      }
+      
       $arrDados = array();
-      $arrDados['ds_produto'] = $ds_produto;
+      $arrDados['ds_produto'] = '"'.$ds_produto.'"';
 
       return Conexao::getInstance()->insert($arrDados,'produto');
    }
