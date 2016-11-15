@@ -8,7 +8,7 @@ class Resultado extends Conexao {
 
    public function __construct(){}
 
-   public function getResultadoPesquisa($idPesquisa,$idProduto){
+   public function getResultadoPesquisa($idPesquisa,$idProduto,$mercados){
       $ds_produto = strtolower($ds_produto);
 
       $sql = 
@@ -18,7 +18,7 @@ class Resultado extends Conexao {
       #"INNER JOIN produto_pesquisa PP ON (PP.id_pesquisa = R.id_pesquisa) ".
       #INNER JOIN produto P ON (P.id_produto = PP.id_produto)
       "WHERE R.id_pesquisa = " . $idPesquisa . " AND".
-      " R.id_produto = ". $idProduto;
+      " R.id_produto = ". $idProduto . $mercados;
 
       $resultado = Conexao::getInstance()->realizaConsulta($sql);
 

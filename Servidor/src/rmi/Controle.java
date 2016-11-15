@@ -63,9 +63,9 @@ public class Controle {
                 "http://busca.deliveryextra.com.br/search?w=replace", 
                 "UTF-8", 
                 "+",
-                "class=\"sli_grid_result\"",
-                "class=\"sli_grid_title sli_h2\"",
-                "class=\"sli_price\"");
+                "class=\"showcase showcase--3 group \"",
+                "class=\"showcase-item__name\"",
+                "class=\"value");
         this.listaSites.add(siteAtual);
         
         siteAtual = new Site(

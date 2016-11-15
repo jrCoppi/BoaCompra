@@ -12,6 +12,19 @@ AppPesquisa.controller(
  */
 function createController( $scope, $http, filterFilter ) {
    $scope.ds_produto = '';
+
+   $scope.buscaRegioes = function(){
+      $http.post(
+          '../ajax/pesquisa/getRegioes.php'
+      )
+      .success(
+          function(data){
+            $scope.arrListaRegiao = data;
+          }
+      );
+   }
+
+   $scope.buscaRegioes();
 }
 
 
@@ -32,5 +45,5 @@ function adicionaProduto(){
 function limpaProdutos(){
    $( ".form-control" ).each(function() {
       $( this ).val("");
-    }); 
+    });
 }

@@ -1,4 +1,4 @@
-<?php include_once('cabecalho.php') 
+<?php include_once('cabecalho.php')
 #Buscar como criar autocomplete com o histórico, ds_produto[] ??
 ?>
     <script src="<?php echo $_SESSION['arrCaminhos']['angular']; ?>pesquisa.js"></script>
@@ -30,17 +30,32 @@
                       <div class="row"><br></div>
 
 
-                      <form id="form" name="form" method="post" 
+                      <form id="form" name="form" method="post"
                          action="../efetua_pesquisa.php" enctype="application/x-www-form-urlencoded" novalidate>
 
                          <div id="container">
                             <div class="form-inline">
                                <div class="form-group">
-                                  <label for="f1">Produto:</label>
+                                  <label for="f1">Região:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                  <select id="id_regiao" name="id_regiao" class="form-control" title="Região" ng-model="id_regiao" required>
+
+                                     <option value="">Selecione</option>
+                                     <option ng-repeat="regiao in arrListaRegiao"  value="{{regiao.id_regiao}}">
+                                       {{regiao.ds_regiao}}
+                                     </option>
+                                  </select>
+                               </div>
+                            </div>
+
+                            <div><br></div>
+
+                            <div class="form-inline">
+                               <div class="form-group">
+                                  <label for="f1">Produto:&nbsp;&nbsp;</label>
                                   <input type="text" class="form-control" name="ds_produto[]" id="ds_produto" ng-model="ds_produto" >
                                </div>
 
-                               <button type="button"  id="incluir" class="btn btn-link glyphicon glyphicon-plus" onClick="adicionaProduto()"></button> 
+                               <button type="button"  id="incluir" class="btn btn-link glyphicon glyphicon-plus" onClick="adicionaProduto()"></button>
 
                             </div>
                          </div>
@@ -55,7 +70,7 @@
                       </form>
 
                       <div class="row"><br></div>
-    
+
                  </div>
               </div>
 
