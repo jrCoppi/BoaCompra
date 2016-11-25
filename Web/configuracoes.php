@@ -31,8 +31,8 @@ $_SESSION['arrProdutosAtuais'] = array();
 
 $_SESSION['arrDadosConexao'] = array();
 $_SESSION['arrDadosConexao']['ipConexao'] = 'localhost';
-$_SESSION['arrDadosConexao']['hostConexao'] = 'root';
-$_SESSION['arrDadosConexao']['passConexao'] = 'root';
+$_SESSION['arrDadosConexao']['hostConexao'] = 'backup';
+$_SESSION['arrDadosConexao']['passConexao'] = 'UniSeguro';
 $_SESSION['arrDadosConexao']['baseConexao'] = 'processos';
 $_SESSION['arrDadosConexao']['nrTentativasConexao'] = 1;
 ?>

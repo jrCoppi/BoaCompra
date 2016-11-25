@@ -5,6 +5,7 @@
  */
 package rmi;
 
+import Dados.Produto;
 import Dados.ResultadoBusca;
 import rmi.Comunicacao;
 import java.rmi.Naming;
@@ -13,6 +14,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Servidor para leitura
@@ -22,7 +25,7 @@ public class ServidorLeitura extends UnicastRemoteObject implements Comunicacao 
     private Controle controle;
     
     public ServidorLeitura(Integer id) throws RemoteException {
-        super();
+        //super();
         this.idServidor = id;
         //Cada servidor tem seu controle para evitar erros
         this.controle = new Controle();
@@ -30,7 +33,7 @@ public class ServidorLeitura extends UnicastRemoteObject implements Comunicacao 
    
     //Inicia os servidores
     public static void main(String[] args) {
-      //  Controle controleInt = Controle.getInstance();
+        //teste();
         try {
            ServidorLeitura serv1 = new ServidorLeitura(1);
            ServidorLeitura serv2 = new ServidorLeitura(2);
@@ -41,15 +44,38 @@ public class ServidorLeitura extends UnicastRemoteObject implements Comunicacao 
            System.out.println("Servidor no ar");
         } catch (Exception ex) {
          //  controleInt.manipula.salvaDados("Exception: " + ex.getMessage());
-        } 
+        }
+    }
+    
+    public static void teste(){
+        try {
+            ServidorLeitura serv1 = new ServidorLeitura(1);
+            String produto = "coca;bono;doritos";
+            String categoria = "1;3;2";
+
+            String[] arrProdutos = produto.split(";");
+            String[] arrCategorias = categoria.split(";");
+            
+            ArrayList<Produto> entrada = new ArrayList<>();
+            Produto produtoAtual;
+            for (int i = 0; i < arrProdutos.length; i++) {
+                produtoAtual = new Produto(arrProdutos[i], arrCategorias[i]);
+                entrada.add(produtoAtual);
+            }
+            serv1.efetuaLeitura(entrada);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ServidorLeitura.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
-    public HashMap<String, ArrayList<ResultadoBusca>> efetuaLeitura(ArrayList<String> Produto) throws RemoteException {
-         // Efetua o procesasmento dos dados
+    public HashMap<String, ArrayList<ResultadoBusca>> efetuaLeitura(ArrayList<Produto> Produto) throws RemoteException {
+         // Efetua o procesasmento dos dadoss
         controle.setListaProdutos(Produto);
         //Dispara leitura e processamento
         controle.disparaPrograma();
+        //classifica 
+        controle.classificaResultados();
         
         return controle.getHashResultado();
     }

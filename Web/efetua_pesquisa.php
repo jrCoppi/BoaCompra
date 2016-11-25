@@ -5,19 +5,30 @@ include_once($_SESSION['arrCaminhos']['dados'].'Mercado.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Produto.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Pesquisa.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Resultado.php');
+include_once($_SESSION['arrCaminhos']['dados'].'Regiao.php');
 
 $WSProcessa = WSProcessa::getInstance(
    $_SESSION['enderecoWebService']
 );
 
-
-
 $objMercado   = new Mercado();
 $objProduto   = new Produto();
 $objPesquisa  = new Pesquisa();
 $objResultado = new Resultado();
+$objRegiao    = new Regiao();
 
-$arrProdutos = $_POST['ds_produto'];
+$arrProdutos   = $_POST['ds_produto'];
+$arrProdutos   = $_POST['ds_produto'];
+$arrCategorias = $_POST['id_categoria'];
+
+//ver regiao
+$arrMercadosValidos = array();
+if($id_regiao != ''){
+   $dados = $objRegiao->getMercadosFromRegiao($id_regiao);
+   foreach ($dados as $key => $dado) {
+      $arrMercadosValidos[] = $dado['id_mercado'];
+   }
+}
 
 //Se ainda temos o que procurar efetua a leitura
 if (!empty($arrProdutos)){
@@ -39,22 +50,29 @@ if (!empty($arrProdutos)){
       //Se encontrou uma pesquisa busca os dados de la
       if($idPesquisa != null){
 
-         $arrDadosPesquisa = $objResultado->getResultadoPesquisa($idPesquisa,$idProduto);
+         $mercados = '';
+         if(empty($arrMercadosValidos) == false){
+            $mercados = ' AND M.id_mercado IN (' . implode(',', $arrMercadosValidos) . ') ';
+         }
+
+         $arrDadosPesquisa = $objResultado->getResultadoPesquisa($idPesquisa,$idProduto,$mercados);
          $arrProdutosPesquisa[$produto]['arrMercados'] = $arrDadosPesquisa;
          unset($arrProdutos[$chave]);
+         unset($arrCategorias[$chave]);
       }
    }
 
    if (!empty($arrProdutos)){
       $arrProdutos = implode(";", $arrProdutos);
+      $arrCategorias = implode(";", $arrCategorias);
 
-      $arrProdutosNovos = $WSProcessa->efetuaLeitura($arrProdutos);
+      $arrProdutosNovos = $WSProcessa->efetuaLeitura($arrProdutos,$arrCategorias);
 
       //Cria uma nova pesquisa
       $id_pesquisa = $objPesquisa->adicionaPesquisa($_SESSION['idCliente']);
 
       foreach ($arrProdutosNovos as $produto => $produtoNovo) {
-         
+
          //Primeiro adiciona o produto novo (se tiver)
          $id_produto = $objProduto->adicionaProduto($produto);
 
@@ -77,6 +95,11 @@ if (!empty($arrProdutos)){
                $mercados['precoProduto'],
                $mercados['descricaoProduto']
             );
+
+            //Não está entre os mercados pesquisados
+            if(in_array($id_mercado,$arrMercadosValidos) == false){
+               unset($arrProdutosNovos[$produto]['arrMercados'][$key]);
+            }
          }
       }
    }

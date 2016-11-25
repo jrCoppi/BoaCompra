@@ -17,7 +17,7 @@ public class WSProcessaImpl implements WSProcessaInterface {
 
     //Efetua leitura a partir da chamada webservice usando RMI
     @Override
-    public String leitura(String produto) {
-        return this.rmi.leitura(produto);
+    public String leitura(String produto, String categoria) {
+        return this.rmi.leitura(produto, categoria);
     }
 }

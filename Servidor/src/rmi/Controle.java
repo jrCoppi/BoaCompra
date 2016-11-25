@@ -1,6 +1,9 @@
 package rmi;
 
 import Arquivo.Manipula;
+import Dados.CategoriaPrincipal;
+import Dados.PalavraAlgoritimo;
+import Dados.Produto;
 import Dados.ResultadoBusca;
 import Dados.Site;
 import Leitura.Leitura;
@@ -16,13 +19,14 @@ import java.util.logging.Logger;
  * @author lcoppi
  */
 public class Controle {
-    private ArrayList<String> listaProdutos;
+    private ArrayList<Produto> listaProdutos;
     private ArrayList<Site> listaSites;
     private HashMap<String,ArrayList<ResultadoBusca>> hashResultados;
     public Manipula manipula;
     private Integer numeroMercados;
     private Leitura leitura;
     private Semaphore semaforoInt;
+    private CategoriaPrincipal categoria;
     
     public Controle(){
         this.listaProdutos = new ArrayList<>();
@@ -32,13 +36,14 @@ public class Controle {
         this.hashResultados = new HashMap<>();
         this.manipula = manipula.getInstance();
         this.semaforoInt = new Semaphore(500,true);
+        this.categoria = new CategoriaPrincipal();
     }
     
-    public ArrayList<String> getListaProdutos() {
+    public ArrayList<Produto> getListaProdutos() {
         return listaProdutos;
     }
 
-    public void setListaProdutos(ArrayList<String> listaProdutos) {
+    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }    
     
@@ -63,9 +68,9 @@ public class Controle {
                 "http://busca.deliveryextra.com.br/search?w=replace", 
                 "UTF-8", 
                 "+",
-                "class=\"sli_grid_result\"",
-                "class=\"sli_grid_title sli_h2\"",
-                "class=\"sli_price\"");
+                "class=\"showcase showcase--3 group \"",
+                "class=\"showcase-item__name\"",
+                "class=\"value");
         this.listaSites.add(siteAtual);
         
         siteAtual = new Site(
@@ -109,13 +114,13 @@ public class Controle {
     
     //Controle de threads, varios sites adicionando ao mesmo tempo varios produtos
     //Chave = Produto
-    public synchronized void adicionarResultado(String produto,ResultadoBusca resultado) {
-        if(this.hashResultados.get(produto) == null){
+    public synchronized void adicionarResultado(String chave,ResultadoBusca resultado) {
+        if(this.hashResultados.get(chave) == null){
             ArrayList<ResultadoBusca> arrInterno = new ArrayList<>();
-            this.hashResultados.put(produto, arrInterno);
+            this.hashResultados.put(chave, arrInterno);
         }
 
-        this.hashResultados.get(produto).add(resultado);
+        this.hashResultados.get(chave).add(resultado);
         notifyAll();
     }
     
@@ -143,4 +148,194 @@ public class Controle {
         this.semaforoInt.release();
     } 
     
+    public void classificaResultados(){
+        HashMap<String,Integer[]> hashPontuacao = new HashMap<>();
+        
+        this.geraPontuacao(hashPontuacao);
+        
+        this.ajustaPontuacao(hashPontuacao);
+        
+        this.normalizaDados(hashPontuacao);
+        
+        this.geraResultado();
+    }
+    
+    private void geraResultado(){
+        String[] chave;
+        String produto;
+        HashMap<String,ArrayList<ResultadoBusca>> arrResultado = new HashMap<>();
+        ResultadoBusca resultado = null;
+        int maiorPontuacao;
+        
+        for (String key : this.getHashResultado().keySet()) {
+            chave = key.split(";");
+            produto = chave[0];
+            maiorPontuacao = 0;
+            resultado = null;
+            
+            //Praca cada elemento do hashmap
+            for (ResultadoBusca ResuladoBusca : this.getHashResultado().get(key)) {
+                if(resultado == null){
+                    maiorPontuacao = ResuladoBusca.getPontuacao();
+                    resultado = ResuladoBusca;
+                }
+                
+                if(maiorPontuacao < ResuladoBusca.getPontuacao()){
+                    maiorPontuacao = ResuladoBusca.getPontuacao();
+                    resultado = ResuladoBusca;
+                }
+            }
+            
+            //Depois de achar o melhor adiciona no array interno
+            if(arrResultado.get(produto) == null){
+                ArrayList<ResultadoBusca> arrInterno = new ArrayList<>();
+                arrResultado.put(produto, arrInterno);
+            }
+            arrResultado.get(produto).add(resultado);
+            
+        }
+        
+        this.hashResultados = arrResultado;
+    }
+    
+    private void ajustaPontuacao(HashMap<String,Integer[]> hashPontuacao){
+        String[] chave;
+ 
+        for (String key : hashPontuacao.keySet()) {
+            if(hashPontuacao.get(key)[0] < 0){
+                //soma no maior a diferenca pra 0
+               hashPontuacao.get(key)[1] = hashPontuacao.get(key)[1] + (hashPontuacao.get(key)[0] * -1);
+               hashPontuacao.get(key)[0] = 0;
+               //VER COMO FICA E FAZER O MESMO PRAS PONTUACOES, VER PROXY
+            }
+        }
+    }
+    
+    private void normalizaDados(HashMap<String,Integer[]> hashPontuacao){
+        String[] chave;
+        String produto;
+        int menorValor;
+        int maiorValor;
+        float valorMedio;
+        float pontuacao;
+        float valorCima;
+                
+        for (String key : this.getHashResultado().keySet()) {
+            chave = key.split(";");
+            produto = chave[0];
+            
+            //Praca cada elemento do hashmap
+            for (ResultadoBusca ResuladoBusca : this.getHashResultado().get(key)) {
+                maiorValor = hashPontuacao.get(produto)[1];
+                menorValor = hashPontuacao.get(produto)[0];
+                valorMedio = maiorValor - menorValor;
+                
+                valorCima = (ResuladoBusca.getPontuacao() - menorValor);
+                
+                pontuacao =  valorCima / (valorMedio);
+                
+                ResuladoBusca.setPontuacao((int) (pontuacao*100));
+            }
+        }
+    }
+    
+    private void geraPontuacao(HashMap<String,Integer[]> hashPontuacao){
+        String[] chave;
+        String produto;
+        Produto produtoInt;
+        int pontuacao;
+        Integer[] arrPontuacao;
+        
+        //hash de pontuacao
+        for (String key : this.getHashResultado().keySet()) {
+            chave = key.split(";");
+            produto = chave[0];
+            arrPontuacao = new Integer[2];
+            arrPontuacao[0] = 999;
+            arrPontuacao[1] = 0;
+            if(hashPontuacao.get(produto) == null){
+                hashPontuacao.put(produto, arrPontuacao);
+            }
+            
+            //Praca cada elemento do hashmap
+            for (ResultadoBusca ResuladoBusca : this.getHashResultado().get(key)) {
+                produtoInt = this.getProduto(produto);
+                pontuacao = this.getPontuacao(
+                        ResuladoBusca.getDescricaoProduto(), 
+                        produtoInt.getCategoria()
+                );
+                
+                //Maior/Menor
+                if(pontuacao < hashPontuacao.get(produto)[0]){
+                    hashPontuacao.get(produto)[0] = pontuacao;
+                }
+                
+                if(pontuacao > hashPontuacao.get(produto)[1]){
+                    hashPontuacao.get(produto)[1] = pontuacao;
+                }
+                
+                //Seta pontuacação
+                ResuladoBusca.setPontuacao(pontuacao);
+            }
+        }
+    }
+    
+    //PEGAR MAIOR E MNOR > FAZER NORMALIZACAO
+    public int getPontuacao(String descricao, String categoria){
+        String[] chave;
+        HashMap<String, PalavraAlgoritimo> hash = null;
+        int pontos = 0;
+        //Pega as palavras com base na categoria
+        switch(categoria){
+            case "1":{
+                hash = this.categoria.getHashPalavrasRefrigerante();
+                break;
+            }
+            case "2":{
+                hash = this.categoria.getHashPalavrasSalgado();
+                break;
+            } 
+            case "3":{
+                hash = this.categoria.getHashPalavrasBolacha();
+                break;
+            }
+            case "4":{
+                hash = this.categoria.getHashPalavrasBebida();
+                break;
+            }
+        }
+        
+        descricao = descricao.toLowerCase();
+        String[] partes = descricao.split(" ");
+        //Pontua as palavras que voltaram da busca
+        for (String palavra : hash.keySet()) {
+
+            for (int i = 0; i < partes.length; i++) {
+                palavra = palavra.toLowerCase();
+                if(partes[i].contains(palavra)){
+                    try{
+                        if(hash.get(palavra).getValorPositivo()){
+                            pontos += hash.get(palavra).getImportancia();
+                        } else {
+                            pontos -= hash.get(palavra).getImportancia();
+                        }  
+                    } catch (Exception ex){
+                        
+                    }
+
+                }
+            }
+        }
+        return pontos;
+    }
+
+    private Produto getProduto(String chave){
+        for (Produto listaProduto : listaProdutos) {
+            if(chave.equals(listaProduto.getDescricao())){
+                return listaProduto;
+            }
+        }
+        
+        return null;
+    }
 }

@@ -9,13 +9,14 @@ package rmi;
  *
  * interface de comunicacao RMI
  */
+import Dados.Produto;
 import Dados.ResultadoBusca;
 import java.rmi.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface Comunicacao extends Remote {
-   public HashMap<String,ArrayList<ResultadoBusca>> efetuaLeitura(ArrayList<String> Produto) throws RemoteException;
+   public HashMap<String,ArrayList<ResultadoBusca>> efetuaLeitura(ArrayList<Produto> Produto) throws RemoteException;
    public HashMap<String,ArrayList<ResultadoBusca>> ordernaResultado(String flag)  throws RemoteException;
 }
 

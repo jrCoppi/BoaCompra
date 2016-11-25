@@ -1,6 +1,7 @@
 package rmi;
 
 import Arquivo.Manipula;
+import Dados.Produto;
 import Dados.ResultadoBusca;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -25,7 +26,7 @@ public class RMIProcessa {
     }
     
     //Efetua leitura a partir do produto vindo do web-service
-    public String leitura(String produto) {
+    public String leitura(String produto, String categoria) {
         try {            
             this.manipula.salvaDados("Antes leitura");
             
@@ -35,10 +36,13 @@ public class RMIProcessa {
             Comunicacao comunica3 = (Comunicacao)Naming.lookup("/" + "localhost" + "/ServidorLeitura3"); 
             
             String[] arrProdutos = produto.split(";");
+            String[] arrCategorias = categoria.split(";");
             
-            ArrayList<String> entrada = new ArrayList<>();
-            for (String produtoArr : arrProdutos) {
-                entrada.add(produtoArr);
+            ArrayList<Produto> entrada = new ArrayList<>();
+            Produto produtoAtual;
+            for (int i = 0; i < arrProdutos.length; i++) {
+                produtoAtual = new Produto(arrProdutos[i], arrCategorias[i]);
+                entrada.add(produtoAtual);
             }
 
             HashMap<String,ArrayList<ResultadoBusca>> retornoFinal;

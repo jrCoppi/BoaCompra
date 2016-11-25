@@ -27,16 +27,11 @@
                                <b>Fale Conosco</b>
                            </h5>
 
-
-                           <div ng-show="sn_exibir_erro_cadastro" ng-init="false" class="text-danger" style="display:none;">
-                               Login ja existente, tente novamente
-                           </div>
-
-                           <form id="form" name="form" method="post" 
-                              action="../efetua_cadastro.php" enctype="application/x-www-form-urlencoded" novalidate>
+                           <form id="form" name="form" method="post"
+                              action="../index.php" enctype="application/x-www-form-urlencoded" novalidate>
 
                               <div class="col-md-12">
-                                 
+
                                  <div class="col-md-1"></div>
                                  <div class="col-md-4">
                                     <label for="f1">Nome:</label>
@@ -49,7 +44,7 @@
                               <div class="col-md-12"><br></div>
 
                               <div class="col-md-12">
-                                 
+
                                  <div class="col-md-1"></div>
                                  <div class="col-md-4">
                                     <label for="f1">Email:</label>
@@ -63,7 +58,7 @@
                               <div class="col-md-12"><br></div>
 
                               <div class="col-md-12">
-                                 
+
                                  <div class="col-md-1"></div>
                                  <div class="col-md-4">
                                     <label for="f1">Mensagem:</label>
@@ -78,7 +73,7 @@
                               <div class="col-md-12">
                                  <div class="col-md-1"></div>
                                  <div class="col-md-4">
-                                    <button type="button" class="btn btn-info" ng-click="cadastrar()">Enviar</button>
+                                    <button type="submit" class="btn btn-info">Enviar</button>
                                  </div>
                                  <div class="col-md-7"></div>
                               </div>

@@ -18,5 +18,5 @@ import javax.jws.soap.SOAPBinding.Style;
 public interface WSProcessaInterface {
     
     @WebMethod 
-    String leitura(String produto);
+    String leitura(String produto, String categoria);
 }

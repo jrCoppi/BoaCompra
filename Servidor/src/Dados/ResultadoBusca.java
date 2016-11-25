@@ -7,9 +7,19 @@ public class ResultadoBusca implements Serializable {
     private String descricaoProduto;
     private String precoProduto;
     private String mercado;
+    private int pontuacao;
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
+    }
 
     public ResultadoBusca(String mercado) {
         this.mercado = mercado;
+        this.pontuacao = 0;
     }
 
     public String getDescricaoProduto() {

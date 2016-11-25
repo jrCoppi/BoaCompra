@@ -47,10 +47,11 @@ class WSProcessa extends WebService
    /**
     * Função WS para efetuar leitura
     */
-   public function efetuaLeitura($produto = '')
+   public function efetuaLeitura($produto = '',$categoria = '')
    {
       $dadosWs = $this->leitura(array(
-         'produto' => $produto
+         'produto' => $produto,
+         'categoria' => $categoria
       ));
 
       $arrProdutos = array();

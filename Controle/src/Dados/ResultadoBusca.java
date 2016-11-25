@@ -1,22 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Dados;
 
 import java.io.Serializable;
 
-/**
- *
- */
+// Salva o resutlado de uma busca
 public class ResultadoBusca implements Serializable {
     private String descricaoProduto;
     private String precoProduto;
     private String mercado;
+    private int pontuacao;
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
+    }
 
     public ResultadoBusca(String mercado) {
         this.mercado = mercado;
+        this.pontuacao = 0;
     }
 
     public String getDescricaoProduto() {

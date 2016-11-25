@@ -1,5 +1,6 @@
 package Leitura;
 
+import Dados.Produto;
 import rmi.Controle;
 import Dados.Site;
 import java.text.Normalizer;
@@ -33,13 +34,13 @@ public class Leitura {
         ArrayList<Site> sites;
         LeitorSite leitor;
         sites = this.controle.getListaSites();
-        ArrayList<String> produtos = this.controle.getListaProdutos();
+        ArrayList<Produto> produtos = this.controle.getListaProdutos();
        
         // Dispara thread para cada site, guarda para ver se todos acabarem
         for (Site siteAtual : sites) {
             
-            for (String produtoAtual : produtos) {
-                leitor = new LeitorSite(siteAtual,removerAcentos(produtoAtual),this.controle);
+            for (Produto produtoAtual : produtos) {
+                leitor = new LeitorSite(siteAtual,removerAcentos(produtoAtual.getDescricao()),this.controle);
                 leitor.start();
                 arrLeitores.add(leitor);
             }

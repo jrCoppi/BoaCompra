@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Properties;
 
 /**
  * Classe que inicia a leitura por site onde cada site é a soma do site + produto
@@ -55,7 +57,7 @@ public class LeitorSite extends Thread {
             /* Properties props = System.getProperties();
              props.put("http.proxyPort","3128"); //proxy port
              props.put("http.proxyHost","proxy.unimestre.com"); //the proxy server name or IP
-             props.put("http.proxySet", "true"); */
+             props.put("http.proxySet", "true");*/
 
             // Usa classes do java pra criar uma url e buscar a pagina
             URLConnection connection = new URL(endereco).openConnection();
@@ -104,12 +106,16 @@ public class LeitorSite extends Thread {
                             inputLine = this.apenasNumeros(inputLine);
                             inputLine = inputLine.replace(",", ".");
                             resultado.setPrecoProduto(inputLine);
-                            break;
+                            
+                            //reset
+                            this.controle.adicionarResultado(produto + ';' + this.site.getNome(), resultado);
+                            resultado = new ResultadoBusca(this.site.getNome());
+                            encontrouDescricao = false;
                         }
                     }
                 }
             }
-            this.controle.adicionarResultado(produto, resultado);
+            
         } catch (Exception ex) {
           this.controle.manipula.salvaDados("Erro ao acessar site; " + endereco + "Iniciado!");
         } finally {
