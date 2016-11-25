@@ -12,11 +12,8 @@ AppPesquisa.controller(
  */
 function createController( $scope, $http, filterFilter ) {
    $scope.ds_produto = '';
-<<<<<<< HEAD
    $scope.arrListaRegiao = null;
    $scope.arrListaCategoria = null;
-=======
->>>>>>> origin/master
 
    $scope.buscaRegioes = function(){
       $http.post(
@@ -29,7 +26,6 @@ function createController( $scope, $http, filterFilter ) {
       );
    }
 
-<<<<<<< HEAD
 
    $scope.buscaCategorias = function(){
       $http.post(
@@ -44,9 +40,6 @@ function createController( $scope, $http, filterFilter ) {
 
    $scope.buscaRegioes();
    $scope.buscaCategorias();
-=======
-   $scope.buscaRegioes();
->>>>>>> origin/master
 }
 
 

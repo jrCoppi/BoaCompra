@@ -6,17 +6,10 @@ include_once($_SESSION['arrCaminhos']['dados'].'Produto.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Pesquisa.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Resultado.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Regiao.php');
-<<<<<<< HEAD
 
 $WSProcessa = WSProcessa::getInstance(
    $_SESSION['enderecoWebService']
 );
-=======
-/*
-$WSProcessa = WSProcessa::getInstance(
-   $_SESSION['enderecoWebService']
-);*/
->>>>>>> origin/master
 
 $objMercado   = new Mercado();
 $objProduto   = new Produto();
@@ -24,14 +17,9 @@ $objPesquisa  = new Pesquisa();
 $objResultado = new Resultado();
 $objRegiao    = new Regiao();
 
-<<<<<<< HEAD
 $arrProdutos   = $_POST['ds_produto'];
 $arrProdutos   = $_POST['ds_produto'];
 $arrCategorias = $_POST['id_categoria'];
-=======
-$arrProdutos = $_POST['ds_produto'];
-$id_regiao   = $_POST['id_regiao'];
->>>>>>> origin/master
 
 //ver regiao
 $arrMercadosValidos = array();

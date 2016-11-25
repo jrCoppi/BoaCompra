@@ -55,7 +55,6 @@
                                   <input type="text" class="form-control" name="ds_produto[]" id="ds_produto" ng-model="ds_produto" >
                                </div>
 
-<<<<<<< HEAD
                                <div class="form-group">
                                   <label for="f1">&nbsp;&nbsp;Categoria:&nbsp;&nbsp;</label>
                                   <select id="id_categoria" name="id_categoria[]" class="form-control" title="Região" ng-model="id_categoria" required>
@@ -66,9 +65,6 @@
                                      </option>
                                   </select>
                                </div>
-=======
-                               <button type="button"  id="incluir" class="btn btn-link glyphicon glyphicon-plus" onClick="adicionaProduto()"></button>
->>>>>>> origin/master
 
                                <button type="button"  id="incluir" class="btn btn-link glyphicon glyphicon-plus" onClick="adicionaProduto()"></button>
                             </div>
