@@ -95,7 +95,7 @@ public class CategoriaPrincipal {
         this.getHashPalavrasSalgado().put("pacote", palavra);
         palavra = new PalavraAlgoritimo("167g", 1, true);
         this.getHashPalavrasSalgado().put("167g", palavra);
-        palavra = new PalavraAlgoritimo("doritos", 5, true);
+        palavra = new PalavraAlgoritimo("doritos", 4, true);
         this.getHashPalavrasSalgado().put("doritos", palavra);
         palavra = new PalavraAlgoritimo("fandangos", 5, true);
         this.getHashPalavrasSalgado().put("fandangos", palavra);
@@ -103,6 +103,18 @@ public class CategoriaPrincipal {
         this.getHashPalavrasSalgado().put("salgado", palavra);
         palavra = new PalavraAlgoritimo("queijo", 2, true);
         this.getHashPalavrasSalgado().put("queijo", palavra);
+        palavra = new PalavraAlgoritimo("sabão", 5, false);
+        this.getHashPalavrasSalgado().put("sabão", palavra);
+        palavra = new PalavraAlgoritimo("pó", 5, false);
+        this.getHashPalavrasSalgado().put("pó", palavra);
+        palavra = new PalavraAlgoritimo("tecido", 5, false);
+        this.getHashPalavrasSalgado().put("tecido", palavra);
+        palavra = new PalavraAlgoritimo("Cerveja", 5, false);
+        this.getHashPalavrasSalgado().put("Cerveja", palavra);
+        palavra = new PalavraAlgoritimo("SKOL", 5, false);
+        this.getHashPalavrasSalgado().put("SKOL", palavra);
+        palavra = new PalavraAlgoritimo("Ruffles", 5, true);
+        this.getHashPalavrasSalgado().put("Ruffles", palavra); 
     }
     
     private void iniciaListaBolacha(){

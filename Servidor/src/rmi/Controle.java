@@ -303,7 +303,11 @@ public class Controle {
                 hash = this.categoria.getHashPalavrasBebida();
                 break;
             }
+            default:
+                return 0;
         }
+        
+        
         
         descricao = descricao.toLowerCase();
         String[] partes = descricao.split(" ");

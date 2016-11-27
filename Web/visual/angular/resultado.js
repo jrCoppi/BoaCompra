@@ -12,6 +12,9 @@ AppResultado.controller(
  */
 function createController( $scope, $http, filterFilter ) {
    $scope.ds_produto = '';
+   $scope.sortType     = 'precoProduto'; // set the default sort type
+   $scope.sortReverse  = false;  // set the default sort order
+   $scope.searchFish   = '';     // set the default search/filter term
 
    $scope.realizaPesquisa = function(){
       $http.post(

@@ -20,6 +20,7 @@ $objRegiao    = new Regiao();
 $arrProdutos   = $_POST['ds_produto'];
 $arrProdutos   = $_POST['ds_produto'];
 $arrCategorias = $_POST['id_categoria'];
+$id_regiao = $_POST['id_regiao'];
 
 //ver regiao
 $arrMercadosValidos = array();
@@ -93,7 +94,8 @@ if (!empty($arrProdutos)){
                $id_mercado,
                $id_pesquisa,
                $mercados['precoProduto'],
-               $mercados['descricaoProduto']
+               $mercados['descricaoProduto'],
+               $mercados['pontuacao']
             );
 
             //Não está entre os mercados pesquisados
@@ -111,7 +113,6 @@ if (!empty($arrProdutos)){
    //Seta os produtos desta pesquisa
    $_SESSION['produtos'] = $arrProdutosNovos;
 }
-
 
 //Vai para a listagem
 header('Location: '. $_SESSION['arrCaminhos']['visual'] . 'resultado.php');

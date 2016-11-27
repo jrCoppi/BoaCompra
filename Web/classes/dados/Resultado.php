@@ -12,7 +12,7 @@ class Resultado extends Conexao {
       $ds_produto = strtolower($ds_produto);
 
       $sql = 
-      "SELECT R.ds_produto_mercado as descricaoProduto, M.ds_mercado as mercado, R.nr_preco as precoProduto ".
+      "SELECT R.ds_produto_mercado as descricaoProduto, M.ds_mercado as mercado, R.nr_preco as precoProduto, R.nr_pontuacao as pontuacao ".
       "FROM resultado R ".
       "INNER JOIN mercado M ON (M.id_mercado = R.id_mercado) ".
       #"INNER JOIN produto_pesquisa PP ON (PP.id_pesquisa = R.id_pesquisa) ".
@@ -30,7 +30,7 @@ class Resultado extends Conexao {
       return $resultado;
    }
 
-   public function adicionaResultado($id_produto,$id_mercado,$id_pesquisa,$nr_preco,$ds_produto){
+   public function adicionaResultado($id_produto,$id_mercado,$id_pesquisa,$nr_preco,$ds_produto,$nr_pontuacao){
       
       $arrDados = array();
       $arrDados['id_produto']  = $id_produto;
@@ -38,6 +38,8 @@ class Resultado extends Conexao {
       $arrDados['id_pesquisa'] = $id_pesquisa;
       $arrDados['nr_preco'] = "'" .$nr_preco. "'";
       $arrDados['ds_produto_mercado'] = "'" .utf8_encode($ds_produto). "'";
+      $arrDados['nr_pontuacao'] = "'" .utf8_encode($nr_pontuacao). "'";
+      
 
       return Conexao::getInstance()->insert($arrDados,'resultado');
    }
