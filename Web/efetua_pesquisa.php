@@ -11,10 +11,11 @@ include_once($_SESSION['arrCaminhos']['dados'].'Regiao.php');
 $WSProcessa = WSProcessa::getInstance(
    $_SESSION['enderecoWebService']
 );
-
+/*
 $WSPlanilha = WSPlanilha::getInstance(
    'http://localhost:90/BoaCompraPlanilha/BoaCompraListaWS.asmx?wsdl'
-);
+);*/
+
 
 $objMercado   = new Mercado();
 $objProduto   = new Produto();
@@ -32,9 +33,32 @@ $caminho = 'C:\temp\processos\planilha.xlsx';
 if($arquivo != ''){
    $dadosArquivo = file_get_contents($arquivo);
    move_uploaded_file($arquivo, $caminho);
-   $WSPlanilha->planilha($caminho);
-}
 
+   $c = curl_init();
+   curl_setopt($c, CURLOPT_URL, 'http://localhost:90/BoaCompraPlanilha/BoaCompraListaWS.asmx/InterpretarPlanilhaExcel');
+   curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+   curl_setopt($c, CURLOPT_POST, TRUE);
+   curl_setopt($c, CURLOPT_SSL_VERIFYHOST, false);
+   curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+   curl_setopt($c, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; rv:33.0) Gecko/20100101 Firefox/33.0");
+   curl_setopt($c, CURLOPT_FOLLOWLOCATION, 1);
+   curl_setopt($c, CURLOPT_HTTPHEADER, 
+      array('Content-Length: 0')  
+   ); 
+   $data = curl_exec($c);
+   curl_close($c);
+
+
+   $data = trim($data);
+   $data = explode(" ",$data);
+   $data = preg_replace( "/\r|\n/", "", $data );
+
+   $data = str_replace('<string>',"",$data);
+   $data = str_replace('</string>',"",$data);
+
+   $arrProdutos = explode(",",$data[7]);
+   $arrCategorias = explode(",",$data[9]);
+}
 
 
 //ver regiao
