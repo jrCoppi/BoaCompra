@@ -20,13 +20,9 @@
 
             <div class="col-sm-12">
 
-               <div class="row page-header">
-                   <p>
-                       <h3 class="text-left negrito" style="font-family: 'Droid Sans',sans-serif;font-style: bold;">
-                           <b>Sistema Boa Compra</b>
-                       </h3>
-                   </p>
-               </div>
+            <!-- HEADER -->
+            <?php include_once('header.php') ?>
+            <!-- HEADER -->
 
                <div class="row"><br></div>
 

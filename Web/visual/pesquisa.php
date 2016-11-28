@@ -31,7 +31,7 @@
 
 
                       <form id="form" name="form" method="post"
-                         action="../efetua_pesquisa.php" enctype="application/x-www-form-urlencoded" novalidate>
+                         action="../efetua_pesquisa.php" enctype="multipart/form-data" novalidate>
 
                          <div id="container">
                             <div class="form-inline">
@@ -68,6 +68,14 @@
 
                                <button type="button"  id="incluir" class="btn btn-link glyphicon glyphicon-plus" onClick="adicionaProduto()"></button>
                             </div>
+                         </div>
+
+
+                         <div class="row"><br></div>
+
+                         <div class="form-inline">
+                           <label class="control-label">Upload de Arquivo</label>
+                           <input id="planilha" name="planilha" type="file" class="file" accept="xls">
                          </div>
 
                          <div class="row"><br></div>

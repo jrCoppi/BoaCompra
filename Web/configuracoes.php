@@ -26,6 +26,7 @@ $_SESSION['arrCaminhos']     = $arrCaminhos;
 $_SESSION['titulo']  = 'Boa Compra';
 
 $_SESSION['enderecoWebService'] = 'http://127.0.0.1:9876/webservice?wsdl';
+$_SESSION['enderecoWebServicePlanilha'] = 'http://localhost:90/BoaCompraPlanilha/BoaCompraListaWS.asmx';
 $_SESSION['arrProdutos'] = array();
 $_SESSION['arrProdutosAtuais'] = array();
 

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once($_SESSION['arrCaminhos']['class'].'WSProcessa.php');
+include_once($_SESSION['arrCaminhos']['class'].'WSPlanilha.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Mercado.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Produto.php');
 include_once($_SESSION['arrCaminhos']['dados'].'Pesquisa.php');
@@ -9,6 +10,10 @@ include_once($_SESSION['arrCaminhos']['dados'].'Regiao.php');
 
 $WSProcessa = WSProcessa::getInstance(
    $_SESSION['enderecoWebService']
+);
+
+$WSPlanilha = WSPlanilha::getInstance(
+   'http://localhost:90/BoaCompraPlanilha/BoaCompraListaWS.asmx?wsdl'
 );
 
 $objMercado   = new Mercado();
@@ -21,6 +26,16 @@ $arrProdutos   = $_POST['ds_produto'];
 $arrProdutos   = $_POST['ds_produto'];
 $arrCategorias = $_POST['id_categoria'];
 $id_regiao = $_POST['id_regiao'];
+$arquivo = $_FILES['planilha']['tmp_name'];
+$caminho = 'C:\temp\processos\planilha.xlsx';
+
+if($arquivo != ''){
+   $dadosArquivo = file_get_contents($arquivo);
+   move_uploaded_file($arquivo, $caminho);
+   $WSPlanilha->planilha($caminho);
+}
+
+
 
 //ver regiao
 $arrMercadosValidos = array();

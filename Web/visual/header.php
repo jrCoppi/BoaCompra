@@ -14,7 +14,6 @@
             <li><a href="cadastro.php">Cadastro</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="pesquisa.php">Buscar</a></li>
-            <li><a href="historico.php">Histórico</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="faleconosco.php">Fale Conosco</a></li>
             <li><a href="#">Sobre</a></li>
